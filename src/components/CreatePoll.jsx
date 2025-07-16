@@ -49,6 +49,9 @@ export default function CreatePoll() {
   // Adds poll option
   function addOption(event) {
     event.preventDefault();
+    if (formData.pollOptions.length >= 20) {
+      return console.error("No more options can be added!");
+    }
     const newOptionData = {
       id: formData.pollOptions[formData.pollOptions.length - 1].id + 1,
       value: "",
