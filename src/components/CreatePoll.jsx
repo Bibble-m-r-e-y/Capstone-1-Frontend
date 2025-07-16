@@ -33,8 +33,6 @@ export default function CreatePoll() {
     filter: [],
   });
 
-  console.log(formData);
-
   // Think of Mock Users as the initial DB pull of existing users
   const MOCK_USERS = [
     { userId: 0, firstName: "Bob", lastName: "Sanchez" },
@@ -97,14 +95,57 @@ export default function CreatePoll() {
     }
   }
 
-  function handleSubmit(event) {
+  function saveFormAsDraft(event) {
     event.preventDefault();
 
-    console.log(formData);
+    // This should send a post request with the formData, and another property of 'status: "draft"'. I think it might be better to separate the `FormData` useState variable as simply representing the frontend form field inputs.
+    const reqBody = {
+      ...formData,
+      options: formData.pollOptions.map((option) => option.value),
+      status: "draft",
+    };
+    delete reqBody.pollOptions;
+    console.log(reqBody);
+  }
+
+  function clearFormData(event) {
+    event.preventDefault();
+
+    setFormData({
+      title: "",
+      description: "",
+      pollOptions: [
+        { id: 0, value: "", key: generateUniqueKey(0), required: true },
+        { id: 1, value: "", key: generateUniqueKey(1), required: true },
+      ],
+      endDate: "",
+      filter: [],
+    });
+  }
+
+  function deletePoll(event) {
+    event.preventDefault();
+
+    // This should send a delete request to the backend, after successful deletion, the page should either refresh to a fresh create poll page or move to a seperate vieweither refresh to a fresh create poll page or move to a seperate view.
+  }
+
+  function handlePublish(event) {
+    event.preventDefault();
+
+    // This should send a post request with the formData, and another property of 'status: "published"'.
+    const reqBody = {
+      ...formData,
+      options: formData.pollOptions.map((option) => option.value),
+      status: "published",
+    };
+    delete reqBody.pollOptions;
+
+    console.log(reqBody);
+    // After the post it might be helpful to either refresh the page to be fresh, or go to homepage/another page
   }
 
   return (
-    <form style={styles.form} onSubmit={handleSubmit}>
+    <form style={styles.form} onSubmit={handlePublish}>
       {/* This will be non functional for now, clicking on this img (or whatever it will be by the end) will open 2 new options for "copy" or "delete". The functions are already created */}
       <img
         style={styles.img}
@@ -170,8 +211,9 @@ export default function CreatePoll() {
           ))}
         </select>
       </label>
-      <button>Save as Draft</button>
+      <button onClick={saveFormAsDraft}>Save as Draft</button>
       <button type="submit">Publish Poll</button>
+      <button onClick={clearFormData}>Clear Form</button>
     </form>
   );
 }
