@@ -9,7 +9,7 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import { API_URL } from "./shared";
-
+import VotePoll from "./components/VotePoll"
 const App = () => {
   const [user, setUser] = useState(null);
 
@@ -55,6 +55,8 @@ const App = () => {
           <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
+          <Route path = "/vote" element={<VotePoll/> } />
+          
         </Routes>
       </div>
     </div>
@@ -65,9 +67,12 @@ const Root = () => {
   return (
     <Router>
       <App />
+
     </Router>
+
   );
 };
 
 const root = createRoot(document.getElementById("root"));
 root.render(<Root />);
+
