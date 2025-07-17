@@ -8,11 +8,12 @@ const NavBar = ({ user, onLogout }) => {
       <div className="nav-brand">
         <Link to="/">Home</Link>
       </div>
-
       <div className="nav-links">
         {user ? (
           <div className="user-section">
             <span className="username">Welcome, {user.username}!</span>
+            <Link to="/create-poll">Create Poll</Link>
+
             <button onClick={onLogout} className="logout-btn">
               Logout
             </button>
