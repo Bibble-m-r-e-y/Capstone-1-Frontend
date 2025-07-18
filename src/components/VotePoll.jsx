@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Test() {
   const [poll, setPoll] = useState({
     title: "Top 3 Video Games",
-    options: ["Black Ops 2", "Persona 5", "Elden Ring"],
+    options: ["Black Ops 2", "Persona 5", "Elden Ring", "mario"],
   });
 
   // Rankings will look like: { Black Ops 2: 1, Persona 5: 2, Elden Ring: 3 }
@@ -36,13 +36,14 @@ function Test() {
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
+            <th>4st</th>
           </tr>
         </thead>
         <tbody>
           {poll.options.map((option) => (
             <tr key={option}>
               <td>{option}</td>
-              {[1, 2, 3].map((rank) => (
+              {[1, 2, 3, 4].map((rank) => (
                 <td key={rank}>
                   <input
                     type="radio"
