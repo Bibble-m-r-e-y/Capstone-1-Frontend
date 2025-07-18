@@ -19,7 +19,7 @@ const Signup = ({ setUser }) => {
 
     if (!formData.username) {
       newErrors.username = "Username is required";
-    } else if (formData.username.length < 3 || formData.username.length > 20) {
+    } else if (formData.username.length < 7 || formData.username.length > 20) {
       newErrors.username = "Username must be between 3 and 20 characters";
     }
 
