@@ -59,9 +59,14 @@ const Home = () => {
   function filterNonDraftPolls() {
     setNonDraftPolls(
       MOCK_POLL_DATA.filter(
-        (poll) => poll.status !== "draft" || poll.status !== "disabled",
+        (poll) => poll.status !== "draft" && poll.status !== "disabled",
       ),
     );
+  }
+
+  function generateKey(num) {
+    const date = new Date();
+    return date.getTime() + num;
   }
 
   useEffect(() => {
@@ -73,13 +78,9 @@ const Home = () => {
 
   return (
     <div className="polls-container">
-      {nonDraftPolls.map((poll) =>
-        poll.status === "ended" ? (
-          <Poll pollData={poll} />
-        ) : (
-          <Poll pollData={poll} />
-        ),
-      )}
+      {nonDraftPolls.map((poll, index) => (
+        <Poll pollData={poll} key={generateKey(index)} />
+      ))}
     </div>
   );
 };
