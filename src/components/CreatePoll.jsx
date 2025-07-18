@@ -1,27 +1,8 @@
 import React, { useState } from "react";
-export default function CreatePoll() {
-  // These are just inline styles I implemented quickly, they can be removed and placed in css file later
-  const styles = {
-    form: {
-      display: "flex",
-      position: "relative",
-      flexDirection: "column",
-      alignItems: "center",
-      border: "1px solid black",
-      width: "50%",
-    },
-    div: { position: "relative", display: "flex" },
-    button: { position: "absolute", right: 0 },
-    img: {
-      width: "35px",
-      position: "absolute",
-      top: 0,
-      right: 0,
-      cursor: "pointer",
-    },
-  };
+import "./CreatePoll.css";
 
-  // These represent the initial 2 poll options a user poll form needs
+export default function CreatePoll() {
+  // This represents the initial data for a poll form
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -148,10 +129,10 @@ export default function CreatePoll() {
   }
 
   return (
-    <form style={styles.form} onSubmit={handlePublish}>
+    <form className="form" onSubmit={handlePublish}>
       {/* This will be non functional for now, clicking on this img (or whatever it will be by the end) will open 2 new options for "copy" or "delete". The functions are already created */}
       <img
-        style={styles.img}
+        className="img"
         src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Ffree-hamburger-menu-icon%2Ffree-hamburger-menu-icon-6.jpg"
       />
       <label htmlFor="title">Title:</label>
@@ -173,13 +154,9 @@ export default function CreatePoll() {
       <label htmlFor="pollOptions">
         Poll Options:
         {formData.pollOptions.map((option, index) => (
-          <div key={option.key} style={styles.div}>
+          <div key={option.key} className="div">
             {!option.required && (
-              <button
-                id={option.id}
-                style={styles.button}
-                onClick={deleteOption}
-              >
+              <button id={option.id} className="button" onClick={deleteOption}>
                 Delete
               </button>
             )}
