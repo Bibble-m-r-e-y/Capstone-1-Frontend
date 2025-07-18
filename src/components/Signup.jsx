@@ -4,9 +4,13 @@ import axios from "axios";
 import "./AuthStyles.css";
 import { API_URL } from "../shared";
 
+const speicalKeys = ["!", "@", "#", "$", "%", "&"];
+
 const Signup = ({ setUser }) => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
+    lastName: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -14,19 +18,45 @@ const Signup = ({ setUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  function speicalChacterChecker(password) {
+    //passowrd checks the chacters passowrd
+
+    return;
+    speicalKeys.some((x) => {
+      // hold each index in the array
+      x.includes(password); // does this password does it include any of theses password
+    });
+  }
+  // some((x) => { insert_logic_here })
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.username) {
-      newErrors.username = "Username is required";
-    } else if (formData.username.length < 7 || formData.username.length > 20) {
-      newErrors.username = "Username must be between 3 and 20 characters";
+    if (!formData.name) {
+      newErrors.name = "name is required";
+    } else if (formData.name.length < 2 || formData.name.length > 22) {
+      newErrors.name = "name has to be bewteen 2 and 22 characters";
     }
 
+    const validateEmail = (e) => {
+      //creating a input box
+      const email = e.target.value; //checking for a valid box
+
+      if (validator.isEmail(email)) {
+        return "Valid Email :)";
+      } else {
+        return "Enter valid Email!";
+      }
+    };
+    console.log(formData.password);
     if (!formData.password) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+    } else if (
+      formData.password.length < 6 ||
+      !speicalChacterChecker(formData.password)
+    ) {
+      newErrors.password =
+        "Password must be at least 6 characters and need a speical key";
+      console.log(newErrors.password);
     }
 
     if (!formData.confirmPassword) {
@@ -51,7 +81,7 @@ const Signup = ({ setUser }) => {
       const response = await axios.post(
         `${API_URL}/auth/signup`,
         {
-          username: formData.username,
+          email: formData.email,
           password: formData.password,
         },
         { withCredentials: true }
@@ -97,18 +127,16 @@ const Signup = ({ setUser }) => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="email">email:</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              className={errors.username ? "error" : ""}
+              className={errors.email ? "error" : ""}
             />
-            {errors.username && (
-              <span className="error-text">{errors.username}</span>
-            )}
+            {errors.email && <span className="error-text">{errors.email}</span>}
           </div>
 
           <div className="form-group">
