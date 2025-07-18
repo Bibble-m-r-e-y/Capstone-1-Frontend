@@ -20,9 +20,7 @@ const Signup = ({ setUser }) => {
 
   function speicalChacterChecker(password) {
     //passowrd checks the chacters passowrd
-
-    return;
-    speicalKeys.some((x) => {
+    return speicalKeys.some((x) => {
       // hold each index in the array
       x.includes(password); // does this password does it include any of theses password
     });
