@@ -52,6 +52,22 @@ const Home = () => {
       endDate: new Date("09/12/2025"),
       sumOfVotes: 10,
     },
+
+  
+
+ {
+      pollId: 6,
+      title: "Poll 7",
+      description: "Description for Poll 6",
+      status: "ended",
+      endDate: new Date("09/12/2025"),
+      sumOfVotes: 10,
+    },
+
+
+  
+
+
   ];
 
   const [nonDraftPolls, setNonDraftPolls] = useState([]);
