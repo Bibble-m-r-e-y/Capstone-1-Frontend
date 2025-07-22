@@ -93,7 +93,6 @@ const Login = ({ setUser }) => {
             />
             {errors.email && <span className="error-text">{errors.email}</span>}
           </div>
-
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
@@ -108,9 +107,11 @@ const Login = ({ setUser }) => {
               <span className="error-text">{errors.password}</span>
             )}
           </div>
-
-          <button>Login with Google</button>
-
+          // This button functionality is not prpoerly finished, as it may/may
+          not need a separate function to handle its process of OAuth.
+          <button disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login with Google"}
+          </button>
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login"}
           </button>
