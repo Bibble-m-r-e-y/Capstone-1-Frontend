@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 function Test() {
   const [poll, setPoll] = useState({
     title: "Top 3 Video Games",
