@@ -109,6 +109,8 @@ const Login = ({ setUser }) => {
             )}
           </div>
 
+          <button>Login with Google</button>
+
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login"}
           </button>
