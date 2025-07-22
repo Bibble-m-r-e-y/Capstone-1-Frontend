@@ -49,7 +49,7 @@ const Signup = ({ setUser }) => {
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (
-      formData.password.length < 6 ||
+      formData.password.length < 8 ||
       !speicalChacterChecker(formData.password)
     ) {
       newErrors.password =
@@ -126,9 +126,13 @@ const Signup = ({ setUser }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">email:</label>
+
             <input
               type="text"
               id="email"
+              pattern=".+@example\.com"
+              size="30"
+              required
               name="email"
               value={formData.email}
               onChange={handleChange}

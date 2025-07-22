@@ -144,3 +144,9 @@
 .auth-link a:hover {
   text-decoration: underline;
 }
+
+.auth-form button:first-of-type {
+    margin-bottom: 10px;
+    background-color: silver;
+    color: black;
+}
