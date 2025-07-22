@@ -107,8 +107,8 @@ const Login = ({ setUser }) => {
               <span className="error-text">{errors.password}</span>
             )}
           </div>
-          // This button functionality is not prpoerly finished, as it may/may
-          not need a separate function to handle its process of OAuth.
+          {/* This button functionality is not prpoerly finished, as it may/may
+          not need a separate function to handle its process of OAuth. */}
           <button disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login with Google"}
           </button>
