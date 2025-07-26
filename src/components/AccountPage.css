@@ -1,0 +1,14 @@
+.account-info-container {
+    text-align: center;
+    width: 350px;
+    height: 100vh;
+}
+
+.profile-image {
+    width: 180px;
+    float: left;
+}
+
+.account-email {
+    display: inline-block;
+}
