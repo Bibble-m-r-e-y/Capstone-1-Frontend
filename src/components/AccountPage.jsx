@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AccountPage.css";
+import axios from "axios";
 
 export default function AccountPage() {
   const [accountInfo, setAccountInfo] = useState({
@@ -9,6 +10,18 @@ export default function AccountPage() {
     profileImage: null,
     email: "",
   });
+
+  async function getCurrentUser() {
+    const me = await axios.get(`${process.env.DEVAPI}/auth/me`, {
+      withCredentials: true,
+    });
+
+    console.log(me);
+  }
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   const MOCK_ACCOUNT = {
     status: "normal",
