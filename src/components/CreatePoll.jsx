@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreatePoll.css";
+import axios from "axios";
+import { API_URL } from "../shared";
 
 export default function CreatePoll() {
   // This represents the initial data for a poll form
@@ -15,11 +17,18 @@ export default function CreatePoll() {
   });
 
   // Think of Mock Users as the initial DB pull of existing users
-  const MOCK_USERS = [
-    { userId: 0, firstName: "Bob", lastName: "Sanchez" },
-    { userId: 1, firstName: "Maria", lastName: "Hernandez" },
-    { userId: 2, firstName: "Joshua", lastName: "Hernandez" },
-  ];
+
+  const [existingUsers, setExistingUsers] = useState([]);
+
+  async function getAllUsers() {
+    const users = await axios.get(`${API_URL}/api/users/`);
+    console.log(users.data);
+    setExistingUsers(users.data);
+  }
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   // For React element mapping, the extra numnber is necessary atleast for this implementation, it should also be a unique number
   function generateUniqueKey(num) {
@@ -66,7 +75,7 @@ export default function CreatePoll() {
     } else if (event.target.name === "filter") {
       const userValues = event.target.value.split(" ");
       temp.push({
-        userId: Number(userValues[0]),
+        id: Number(userValues[0]),
         firstName: userValues[1],
         lastName: userValues[2],
       });
@@ -178,12 +187,12 @@ export default function CreatePoll() {
         Who can access your poll
         <select name="filter" id="filter" onChange={onFormChange}>
           <option defaultValue={null}>-- Select User --</option>
-          {MOCK_USERS.map((user, i) => (
+          {existingUsers.map((user, i) => (
             <option
               key={generateUniqueKey(i)}
-              value={`${user.userId} ${user.firstName} ${user.lastName}`}
+              value={`${user.id} ${user.firstName} ${user.lastName}`}
               disabled={formData.filter.some(
-                (filteredUser) => filteredUser.userId === user.userId,
+                (filteredUser) => filteredUser.id === user.id,
               )}
             >
               {user.firstName} {user.lastName}
